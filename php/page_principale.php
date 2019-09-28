@@ -162,25 +162,32 @@
         <IMG src="../IMAGES/img-27.png" alt="img-27.png" />
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <IMG src="../IMAGES/img-19.png" alt="img-19.png" /> Facebook
-          <IMG src="../IMAGES/img-20.png" alt="img-20.png" /> Twitter
-          <IMG src="../IMAGES/img-21.png" alt="img-21.png" /> YouTube
-          <IMG src="../IMAGES/img-22.png" alt="img-22.png" /> RSS Feed
-          <IMG src="../IMAGES/img-25.png" alt="img-25.png" />
-          <IMG src="../IMAGES/img-26.png" alt="img-26.png" />
-          <IMG src="../IMAGES/img-23.png" alt="img-23.png" />
-          <IMG src="../IMAGES/img-24.png" alt="img-24.png" />
-        </div>
-        <div class="col-md-12">
-          <div class="col-md-6">
-            2013 SoftMarket Mangento Store by emthemes.com
-          </div>
-          <div class="col-md-6">
-            EN FR ES $ € £
-          </div>
-        </div>
-      </div>
+                    <div class="col-md-6">
+                      <IMG src="../IMAGES/img-19.png" alt="img-19.png" /> Facebook
+                      <IMG src="../IMAGES/img-20.png" alt="img-20.png" /> Twitter
+                      <IMG src="../IMAGES/img-21.png" alt="img-21.png" /> YouTube
+                      <IMG src="../IMAGES/img-22.png" alt="img-22.png" /> RSS Feed
+                    </div>
+                      
+                      <div class="col-md-3 offset-md-3 text-right">
+                      <IMG src="../IMAGES/img-25.png" alt="img-25.png" />
+                      <IMG src="../IMAGES/img-26.png" alt="img-26.png" />
+                      <IMG src="../IMAGES/img-23.png" alt="img-23.png" />
+                      <IMG src="../IMAGES/img-24.png" alt="img-24.png" />
+                      </div>
+
+                    <div class="col-md-12">
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="smallpolice">©2013 SoftMarket Mangento Store by emthemes.com</span>
+                            </div>
+                            <div class="col-md-3 offset-md-3 text-right">
+                                <span class="smallpolice"><span class="gras">EN &nbsp;</span> FR &nbsp; ES &nbsp; <span class="gras">$ </span> €  £ &</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
     </div>
   </body>
 </HTML>

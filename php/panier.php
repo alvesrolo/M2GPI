@@ -190,7 +190,7 @@
                       <IMG src="../IMAGES/img-22.png" alt="img-22.png" /> RSS Feed
                     </div>
                       
-                      <div class="col-md-3 offset-md-3">
+                      <div class="col-md-3 offset-md-3 text-right">
                       <IMG src="../IMAGES/img-25.png" alt="img-25.png" />
                       <IMG src="../IMAGES/img-26.png" alt="img-26.png" />
                       <IMG src="../IMAGES/img-23.png" alt="img-23.png" />
@@ -203,8 +203,8 @@
                             <div class="col-md-6">
                                 <span class="smallpolice">©2013 SoftMarket Mangento Store by emthemes.com</span>
                             </div>
-                            <div class="col-md-3 offset-md-3">
-                                <span class="smallpolice text-right"><span class="gras">EN &nbsp;</span> FR &nbsp; ES &nbsp; <span class="gras">$ </span> €  £ &</span>
+                            <div class="col-md-3 offset-md-3 text-right">
+                                <span class="smallpolice"><span class="gras">EN &nbsp;</span> FR &nbsp; ES &nbsp; <span class="gras">$ </span> €  £ &</span>
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <LINK type="text/css" rel="stylesheet" href="../CSS/softmarket.css" />
+    <link type="text/css" rel="stylesheet" href="../CSS/softmarket.css" />
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -29,133 +29,121 @@
     <TITLE> SoftMarket QAR</TITLE>
   </HEAD>
   <body>
-    <header>
-      <div class="navbar">
-        <span>Shop by Phone (01) 123 456 &nbsp;</span>
-        <span class="blue-text">Live Chat With Us</span>
-        <div class="ml-auto">
-          <span class="blue-text">
-            My Account | My Cart
-          </span>
+    <div class="container">
+      <header>
+        <div class="navbar">
+          <span>Shop by Phone (01) 123 456 &nbsp;</span>
+          <span class="blue-text">Live Chat With Us</span>
+          <div class="ml-auto">
+            <span class="blue-text">
+              My Account | My Cart
+            </span>
+          </div>
         </div>
-      </div>
-      <nav class="navbar navbar-expand-lg navbar-light ">
-        <img src="../IMAGES/img-01.png" alt="img-01.png" />
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-light ">
+          <img src="../IMAGES/img-01.png" alt="img-01.png" />
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">OFFICE</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">MULTIMEDIA</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">DESIGN</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">DEVELOPER</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">UTILITIES</a>
-            </li>
-            <li class="nav-item mr-4">
-              <a class="nav-link" href="#">GAMES</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <!-- <input
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">OFFICE</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">MULTIMEDIA</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">DESIGN</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">DEVELOPER</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">UTILITIES</a>
+              </li>
+              <li class="nav-item mr-4">
+                <a class="nav-link" href="#">GAMES</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <!-- <input
               class="form-control mr-sm-3"
               type="search"
               aria-label="Search"
             /> -->
 
-            <div class="form-group has-search">
+              <div class="form-group has-search">
                 <input type="text" class="form-control" />
                 <span class="fa fa-search form-control-feedback"></span>
-            </div>
-
-          </form>
-        </div>
-      </nav>
-    </header>
+              </div>
+            </form>
+          </div>
+        </nav>
+      </header>
+    </div>
 
     <hr />
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          DESIGN
+      <div class="row mb-4">
+        <div class="col-md-3 ">
+          <div class="border gray-background">
+            <div class="ml-3 mt-3 mb-3">
+              <b>Shop By</b>
+            </div>
+          </div>
+          <div class="border">
+            <div class="ml-3 mt-2 mr-3">
+              <p class="gray-text">Categories</p>
+              <hr />
+              <div>
+                <span>categorie 1</span>
+              </div>
+              <div>
+                <span>categorie 2</span>
+              </div>
+              <div>
+                <span>categorie 3</span>
+              </div>
+
+              <p class="gray-text mt-4">Prices</p>
+              <hr />
+              <img class="img-fluid" src="../IMAGES/range.png" alt="" />
+
+              <p class="gray-text mt-4">Color</p>
+              <hr />
+              <img class="img-fluid" src="../IMAGES/colors.png" alt="" />
+
+              <p class="gray-text mt-4">Brand</p>
+              <hr />
+
+              <div class="mb-4">
+                <div>
+                  <span>Sony</span>
+                </div>
+                <div>
+                  <span>Philips</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-md-2">
-            Shop BY
-          </div>
-          <div class="col-md-10">
-            <div class="col-md-12">
-              BANNER
-            </div>
-            <div class="col-md-12">
-              item
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="col-md-6">
-                  photo
-                </div>
-                <div class="col-md-6">
-                  <div class="col-md-6">
-                    NOM et prix
-                  </div>
-                  <div class="col-md-6">
-                    ADD TO CARD
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="col-md-6">
-                  photo1
-                </div>
-                <div class="col-md-6">
-                  <div class="col-md-6">
-                    NOM et prix1
-                  </div>
-                  <div class="col-md-6">
-                    ADD TO CARD1
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="col-md-6">
-                  photo2
-                </div>
-                <div class="col-md-6">
-                  <div class="col-md-6">
-                    NOM et prix2
-                  </div>
-                  <div class="col-md-6">
-                    ADD TO CARD2
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            PAGE
-          </div>
+
+        <div style="background-color: royalblue" class="offset-md-1 col-md-8">
+          ksdfjskhfkj
         </div>
       </div>
+
       <div class="row">
         <div class="col-md-3">
           <IMG src="../IMAGES/img-14.png" alt="img-14.png" />

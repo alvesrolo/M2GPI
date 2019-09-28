@@ -1,21 +1,39 @@
-.blue-text{
-
-    color: #469DDC;
+.blue-text {
+  color: #469ddc;
 }
 
+.gray-background {
+  background-color: #c7c7c7;
+}
+
+.gray-text {
+  color: gray;
+}
 
 .has-search .form-control {
-    padding-right: 2.375rem;
+  padding-right: 2.375rem;
 }
 
 .has-search .form-control-feedback {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    width: 25.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    text-align: center;
-    pointer-events: none;
-    color: black;
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 25.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: black;
+}
+
+.etoile::after {
+  content: "*";
+  color: red;
+}
+
+.smallpolice {
+  font-size: 13px;
+}
+.gras {
+  font-weight: bold;
 }

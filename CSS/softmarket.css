@@ -37,3 +37,23 @@
 .gras {
   font-weight: bold;
 }
+
+li {
+  list-style-type: none;
+}
+
+.promotion{
+  position : absolute;
+  top : 4px;
+  left: 115px;
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .promotion{
+    position : absolute;
+    top : 6px;
+    left: 277px;
+  }
+}

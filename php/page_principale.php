@@ -1,3 +1,178 @@
+<?php
+
+  class BDD{
+    public $BDD;
+    function connexion(){
+        try
+        {
+            $this->BDD = new PDO('mysql:host=localhost;dbname=qar_ihm;charset=utf8', 'root', '');
+            //echo("connexion OK");
+        }
+        catch (Exception $e)
+        {
+                die('Erreur : ' . $e->getMessage());
+        }
+    }
+    function getCategories(){
+      try
+      {
+        $req = $this->BDD->prepare('SELECT * from categories');
+        $req->execute();
+        while ($donnees = $req->fetch())
+        {
+          //echo "<li><a href=page_principale.php?$donnees['id']>" . $donnees['nom'].'</a></li>';
+          ?>
+          <li><a href="page_principale.php?categorie=<?php echo $donnees['id'] ?>"><?php echo $donnees['nom'] ?></a></li>
+          <?php
+        }
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+    function getProductsByCategories(){
+      try
+      {
+        $req = $this->BDD->prepare('SELECT * from produits where categories_id=?');
+        $req->execute(array($_GET['categorie']));
+        while ($donnees = $req->fetch())
+        {
+          // echo '<div class="col-md-4">' $donnees['nom'] .$donnees['prix'] . $donnees['description'] .$donnees['couleurs']. $donnees['url_image'] . $donnees['marque']'</div>';
+          ?>
+          <div class='col-md-4 text-center mb-4'>
+            
+            <IMG src="<?php echo $donnees['url_image']?>"/>
+            <?php if($donnees['promotion']!=0){
+              ?><IMG class="promotion" src="../IMAGES/img-09.png" alt="img-09.png" class="img-fluid"/><?php
+            }
+            ?>
+            <?php if($donnees['nouveau']!=0){
+              ?><IMG class="promotion" src="../IMAGES/img-10.png" alt="img-10.png" class="img-fluid"/><?php
+            }
+            ?>
+            
+            <div class='text-left'>
+              <?php echo $donnees['nom'] ?>
+            </div>
+            <div class='text-left'>
+              <?php echo "$".$donnees['prix'] ?>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-secondary mr-1">ADD TO CARD</button>
+              <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
+              <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
+            </div>
+          </div>
+          <?php
+        }
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+
+    function getAllProducts(){
+      try
+      {
+        $req = $this->BDD->prepare('SELECT * from produits');
+        $req->execute();
+        while ($donnees = $req->fetch())
+        {
+          // echo '<div class="col-md-4">' $donnees['nom'] .$donnees['prix'] . $donnees['description'] .$donnees['couleurs']. $donnees['url_image'] . $donnees['marque']'</div>';
+          ?>
+          <div class='col-md-4 text-center mb-4'>
+            
+            <IMG src="<?php echo $donnees['url_image']?>"/>
+            <?php if($donnees['promotion']!=0){
+              ?><IMG class="promotion" src="../IMAGES/img-09.png" alt="img-09.png" class="img-fluid"/><?php
+            }
+            ?>
+            <?php if($donnees['nouveau']!=0){
+              ?><IMG class="promotion" src="../IMAGES/img-10.png" alt="img-10.png" class="img-fluid"/><?php
+            }
+            ?>
+            
+            <div class='text-left'>
+              <?php echo $donnees['nom'] ?>
+            </div>
+            <div class='text-left'>
+              <?php echo "$".$donnees['prix'] ?>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-secondary mr-1">ADD TO CARD</button>
+              <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
+              <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
+            </div>
+          </div>
+          <?php
+        }
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+
+    function getCountProducts(){
+      try
+      {
+        if(isset($_GET['categorie'])){
+          $req = $this->BDD->prepare('SELECT count(*) from produits where categories_id=?');
+          $req->execute(array($_GET['categorie']));
+        }else {
+          $req = $this->BDD->prepare('SELECT count(*) from produits');
+          $req->execute();
+        }
+        $donnees = $req->fetchColumn();
+        echo $donnees;
+        
+
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+    function getBrand(){
+      try
+      {
+        $req = $this->BDD->prepare('SELECT * from marque');
+        $req->execute();
+        while ($donnees = $req->fetch())
+        {
+          ?>
+          <div class="form-check">
+          <input type="checkbox" class="form-check-input" />
+          <label class="form-check-label" for="exampleCheck1"
+            ><?php echo $donnees['nom'];?></label>
+        </div>
+         <?php
+          
+        }
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+  }
+
+
+  $bdd_co = new BDD();
+
+  $bdd_co->connexion();
+
+  
+  
+
+?>
+
 <HTML>
   <HEAD>
     <link
@@ -107,16 +282,9 @@
             <div class="ml-3 mt-2 mr-3">
               <p class="gray-text">Categories</p>
               <hr />
-              <div>
-                <span>categorie 1</span>
-              </div>
-              <div>
-                <span>categorie 2</span>
-              </div>
-              <div>
-                <span>categorie 3</span>
-              </div>
-
+              <?php
+               $bdd_co->getCategories();
+               ?>
               <p class="gray-text mt-4">Prices</p>
               <hr />
               <img class="img-fluid" src="../IMAGES/range.png" alt="" />
@@ -129,26 +297,36 @@
               <hr />
 
               <div class="mb-4">
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" />
-                  <label class="form-check-label" for="exampleCheck1"
-                    >Sony</label
-                  >
-                </div>
-
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" />
-                  <label class="form-check-label" for="exampleCheck1"
-                    >Philips</label
-                  >
-                </div>
+                
+                <?php $bdd_co->getBrand();?>
               </div>
             </div>
           </div>
         </div>
 
-        <div style="background-color: royalblue" class="offset-md-1 col-md-8">
-          ksdfjskhfkj
+        <div class="offset-md-1 col-md-8">
+          <IMG src="../IMAGES/img-03.png" alt="img-03.png" class="img-fluid"/>
+        <div class="row mt-4">
+          <div class="col-2">
+            <?php $bdd_co->getCountProducts();?> item(s)
+          </div>
+          <div class="text-right col-10 ">
+            <IMG src="../IMAGES/img-04.png" alt="img-04.png" class="img-fluid"/>
+            <IMG src="../IMAGES/img-05.png" alt="img-05.png" class="img-fluid"/>
+            <IMG src="../IMAGES/img-06.png" alt="img-06.png" class="img-fluid"/>
+            <IMG src="../IMAGES/img-07.png" alt="img-07.png" class="img-fluid"/>
+          </div>
+        </div>
+          <hr>
+        <div class="row">
+          <?php 
+             if (isset($_GET['categorie'])) {
+                $bdd_co->getProductsByCategories($_GET['categorie']);
+              } else {
+                $bdd_co->getAllProducts();
+          }
+          ?>
+        </div>
         </div>
       </div>
 

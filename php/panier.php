@@ -1,3 +1,4 @@
+<?php session_start();?>
 <html>
     <HEAD>
             <link type="text/css" rel="stylesheet" href="./../CSS/softmarket.css" />
@@ -36,9 +37,9 @@
                   <span>Shop by Phone (01) 123 456 &nbsp;</span>
                   <span class="blue-text">Live Chat With Us</span>
                   <div class="ml-auto">
-                    <span class="blue-text">
-                      My Account | My Cart
-                    </span>
+                  <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Account &nbsp;</span></button> 
+              | 
+              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Cart (0) &nbsp;</span></button>
                   </div>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light ">

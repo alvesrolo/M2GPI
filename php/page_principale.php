@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
   class BDD{
     public $BDD;
@@ -59,7 +59,7 @@
               <?php echo "$".$donnees['prix'] ?>
             </div>
             <div>
-              <button type="button" class="btn btn-outline-secondary mr-1">ADD TO CARD</button>
+              <button type="button" class="btn btn-outline-secondary mr-1" onclick="<?php addCart($donnees['id'])?>">ADD TO CART</button>
               <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
               <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
             </div>
@@ -102,7 +102,7 @@
               <?php echo "$".$donnees['prix'] ?>
             </div>
             <div>
-              <button type="button" class="btn btn-outline-secondary mr-1">ADD TO CARD</button>
+              <button type="button" class="btn btn-outline-secondary mr-1" onclick="<?php addCart($donnees['id'])?>">ADD TO CART</button>
               <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
               <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
             </div>
@@ -129,7 +129,6 @@
         }
         $donnees = $req->fetchColumn();
         echo $donnees;
-        
 
       }
       catch (Exception $e)
@@ -162,13 +161,30 @@
     }
 
   }
+      function creatCart(){
+        if(!isset($_SESSION['cart'])){
+          $_SESSION['cart']=array();
+        }
+      }
 
+      function addCart($id_product)
+      {
+        $_SESSION['cart'][] = $id_product;
+                
+      }
+
+      function countCart()
+      {
+        $nbCart = count($_SESSION['cart']);
+        
+        return $nbCart;
+      }
 
   $bdd_co = new BDD();
 
   $bdd_co->connexion();
 
-  
+  creatCart();
   
 
 ?>
@@ -210,9 +226,9 @@
           <span>Shop by Phone (01) 123 456 &nbsp;</span>
           <span class="blue-text">Live Chat With Us</span>
           <div class="ml-auto">
-            <span class="blue-text">
-              My Account | My Cart
-            </span>
+              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Account &nbsp;</span></button> 
+              | 
+              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Cart (<?php echo countCart(); ?>) &nbsp;</span></button>
           </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light ">

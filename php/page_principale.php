@@ -87,7 +87,11 @@
             <div class='text-left'>
               <?php echo "$".$donnees['prix'] ?>
             </div>
+            <div  class="col-md-6">
+            <IMG src="../IMAGES/etoile.png" alt="etoile.png" class="img-fluid"/>
+            </div>
             <div>
+              
               <button type="button" class="btn btn-outline-secondary mr-1" onclick='addToCart(<?php echo json_encode($donnees) ?>)'>ADD TO CART</button>
               <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
               <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
@@ -131,6 +135,9 @@
             <div class='text-left'>
               <?php echo "$".$donnees['prix'] ?>
             </div>
+            <div  class="col-md-6">
+            <IMG src="../IMAGES/etoile.png" alt="etoile.png" class="img-fluid"/>
+            </div>
             <div>
               <button type="button" class="btn btn-outline-secondary mr-1" onclick='addToCart(<?php echo json_encode($donnees) ?>)'>ADD TO CART</button>
               <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
@@ -173,6 +180,9 @@
             </div>
             <div class='text-left'>
               <?php echo "$".$donnees['prix'] ?>
+            </div>
+            <div  class="col-md-6">
+            <IMG src="../IMAGES/etoile.png" alt="etoile.png" class="img-fluid"/>
             </div>
             <div>
               <button type="button" class="btn btn-outline-secondary mr-1" onclick='addToCart(<?php echo json_encode($donnees) ?>)'>ADD TO CART</button>

@@ -49,6 +49,17 @@ li {
 
 }
 
+.sous_cat{
+  margin: 10px;
+}
+
+.lien{
+  color:black;
+}
+
+.path{
+  font-size: 10px;
+}
 
 @media screen and (max-width: 767px) {
   .promotion{

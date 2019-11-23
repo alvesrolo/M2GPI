@@ -13,6 +13,26 @@
                 die('Erreur : ' . $e->getMessage());
         }
     }
+    function getSubCategories($donnees){
+      try
+      {
+        $req = $this->BDD->prepare('SELECT * from souscategories where id_cat='.$donnees['id']);
+        $req->execute();
+        
+        
+          while ($donnees_souscat = $req->fetch())
+          {
+            //echo "<li><a href=page_principale.php?$donnees['id']>" . $donnees['nom'].'</a></li>';
+            ?>
+            <li class="sous_cat"><a class="lien js-click" href="page_principale.php?categorie=<?php echo $donnees['id'] ?>&souscategorie=<?php echo $donnees_souscat['id'] ?>"><?php echo $donnees_souscat['nom'] ?></a> (<?php $this->getCountProductsBySubCategories($donnees_souscat['id']);?>)</li>
+            <?php
+          }
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
     function getCategories(){
       try
       {
@@ -22,8 +42,12 @@
         {
           //echo "<li><a href=page_principale.php?$donnees['id']>" . $donnees['nom'].'</a></li>';
           ?>
-          <li><a href="page_principale.php?categorie=<?php echo $donnees['id'] ?>"><?php echo $donnees['nom'] ?></a></li>
+          <li ><a class="lien box" href="page_principale.php?categorie=<?php echo $donnees['id'] ?>"><?php echo $donnees['nom']?></a> (<?php $this->getCountProducts($donnees['id']);?>)</li>
           <?php
+          if (isset($_GET['categorie']) && $_GET['categorie'] == $donnees['id'] ) {
+          $this->getSubCategories($donnees);
+          }
+          
         }
       }
       catch (Exception $e)
@@ -31,10 +55,15 @@
               die('Erreur : ' . $e->getMessage());
       }
     }
+
+    
     function getProductsByCategories(){
       try
       {
-        $req = $this->BDD->prepare('SELECT * from produits where categories_id=?');
+        $req = $this->BDD->prepare('SELECT * FROM categories as cat
+        INNER JOIN souscategories as sc ON cat.id = sc.id_cat
+        INNER JOIN produits as pr ON pr.souscategories_id = sc.id
+        WHERE cat.id =?');
         $req->execute(array($_GET['categorie']));
         while ($donnees = $req->fetch())
         {
@@ -59,7 +88,51 @@
               <?php echo "$".$donnees['prix'] ?>
             </div>
             <div>
-              <button type="button" class="btn btn-outline-secondary mr-1" onclick="<?php addCart($donnees['id'])?>">ADD TO CART</button>
+              <button type="button" class="btn btn-outline-secondary mr-1" onclick='addToCart(<?php echo json_encode($donnees) ?>)'>ADD TO CART</button>
+              <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
+              <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
+            </div>
+          </div>
+          <?php
+        }
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+    function getProductsBySubCategories(){
+      try
+      {
+        $req = $this->BDD->prepare('SELECT * FROM souscategories as souscat
+        INNER JOIN produits as pr ON pr.souscategories_id = souscat.id
+        WHERE souscat.id=?');
+        $req->execute(array($_GET['souscategorie']));
+        while ($donnees = $req->fetch())
+        {
+          // echo '<div class="col-md-4">' $donnees['nom'] .$donnees['prix'] . $donnees['description'] .$donnees['couleurs']. $donnees['url_image'] . $donnees['marque']'</div>';
+          ?>
+          <div class='col-md-4 text-center mb-4'>
+            
+            <IMG src="<?php echo $donnees['url_image']?>"/>
+            <?php if($donnees['promotion']!=0){
+              ?><IMG class="promotion" src="../IMAGES/img-09.png" alt="img-09.png" class="img-fluid"/><?php
+            }
+            ?>
+            <?php if($donnees['nouveau']!=0){
+              ?><IMG class="promotion" src="../IMAGES/img-10.png" alt="img-10.png" class="img-fluid"/><?php
+            }
+            ?>
+            
+            <div class='text-left'>
+              <?php echo $donnees['nom'] ?>
+            </div>
+            <div class='text-left'>
+              <?php echo "$".$donnees['prix'] ?>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-secondary mr-1" onclick='addToCart(<?php echo json_encode($donnees) ?>)'>ADD TO CART</button>
               <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
               <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
             </div>
@@ -102,7 +175,7 @@
               <?php echo "$".$donnees['prix'] ?>
             </div>
             <div>
-              <button type="button" class="btn btn-outline-secondary mr-1" onclick="<?php addCart($donnees['id'])?>">ADD TO CART</button>
+              <button type="button" class="btn btn-outline-secondary mr-1" onclick='addToCart(<?php echo json_encode($donnees) ?>)'>ADD TO CART</button>
               <IMG src="../IMAGES/img-12.png" alt="img-12.png" class="img-fluid"/>
               <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
             </div>
@@ -117,18 +190,67 @@
     }
 
 
-    function getCountProducts(){
+    function getCountAllProducts(){
       try
       {
-        if(isset($_GET['categorie'])){
-          $req = $this->BDD->prepare('SELECT count(*) from produits where categories_id=?');
+        if(isset($_GET['categorie']) && !isset($_GET['souscategorie'])){
+          $req = $this->BDD->prepare('SELECT count(*) FROM categories as cat
+          INNER JOIN souscategories as sc ON cat.id = sc.id_cat
+          INNER JOIN produits as pr ON pr.souscategories_id = sc.id
+          WHERE cat.id =?');
           $req->execute(array($_GET['categorie']));
-        }else {
+        }elseif (isset($_GET['souscategorie'])){
+          $req = $this->BDD->prepare('SELECT count(*) FROM souscategories as souscat
+          INNER JOIN produits as pr ON pr.souscategories_id = souscat.id
+          WHERE souscat.id =?');
+          $req->execute(array($_GET['souscategorie']));
+        }
+        else {
           $req = $this->BDD->prepare('SELECT count(*) from produits');
           $req->execute();
         }
         $donnees = $req->fetchColumn();
         echo $donnees;
+
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+    function getCountProducts($categories_id){
+      try
+      {
+          $req = $this->BDD->prepare('SELECT count(*) FROM categories as cat
+          INNER JOIN souscategories as sc ON cat.id = sc.id_cat
+          INNER JOIN produits as pr ON pr.souscategories_id = sc.id
+          WHERE cat.id =?');
+          $req->execute(array($categories_id));
+       
+        /*else {
+          $req = $this->BDD->prepare('SELECT count(*) from produits');
+          $req->execute();
+        }*/
+        $donnees = $req->fetchColumn();
+        echo $donnees;
+
+      }
+      catch (Exception $e)
+      {
+              die('Erreur : ' . $e->getMessage());
+      }
+    }
+
+    function getCountProductsBySubCategories($subcategories_id){
+      try
+      {
+          $req = $this->BDD->prepare('SELECT count(*) FROM souscategories as souscat
+          INNER JOIN produits as pr ON pr.souscategories_id = souscat.id
+          WHERE souscat.id =?');
+          $req->execute(array($subcategories_id));
+          $donnees = $req->fetchColumn();
+          echo $donnees;
 
       }
       catch (Exception $e)
@@ -160,37 +282,59 @@
       }
     }
 
-  }
-      function creatCart(){
-        if(!isset($_SESSION['cart'])){
-          $_SESSION['cart']=array();
-        }
-      }
+    function getCountCart(){
 
-      function addCart($id_product)
+      if (!empty($_SESSION['cart'])){
+        echo count($_SESSION['cart']['id_product']);
+      }else{
+         echo 0;
+      }
+    }
+
+  }
+      
+
+      /*function addCart($donnees)
       {
-        $_SESSION['cart'][] = $id_product;
+        if (empty($_SESSION['cart']))
+        {
+
+        }
+        else{
+          array_push($_SESSION['cart']['id_article'],$donnees['id']);
+          array_push($_SESSION['cart']['qte'],1);
+          array_push($_SESSION['cart']['url_image'],$donnees['url_image']);
+          array_push($_SESSION['cart']['prix'],$donnees['prix']);
+        }
                 
       }
-
+   
       function countCart()
       {
-        $nbCart = count($_SESSION['cart']);
-        
-        return $nbCart;
+        if (!empty($_SESSION['cart']))
+        {
+          foreach($_SESSION['cart']['id_article'])
+          {
+            $nbCart = $nbCart + 1;
+          }          
+          return $nbCart;
+        }
+        return 0;
       }
+    */
 
   $bdd_co = new BDD();
 
   $bdd_co->connexion();
 
-  creatCart();
-  
+ 
 
 ?>
 
 <HTML>
   <HEAD>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+     
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -202,11 +346,7 @@
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link type="text/css" rel="stylesheet" href="../CSS/softmarket.css" />
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
+   
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -217,7 +357,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <TITLE> SoftMarket QAR</TITLE>
+    <TITLE> SoftMarket Alves Rolo Quentin M2GPI 2019</TITLE>
   </HEAD>
   <body>
     <div class="container">
@@ -228,7 +368,7 @@
           <div class="ml-auto">
               <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Account &nbsp;</span></button> 
               | 
-              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Cart (<?php echo countCart(); ?>) &nbsp;</span></button>
+              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text" onclick="location.href='panier.php'">My Cart (<span id="counter-cart"><?php $bdd_co->getCountCart(); ?></span>) &nbsp;</span></button>
           </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light ">
@@ -286,7 +426,8 @@
     <hr />
 
     <div class="container">
-      <h3>Design</h3>
+      <span class="path">Home  >  Design</span>
+      <h3>Design</h3><BR>
       <div class="row mb-4">
         <div class="col-md-3 ">
           <div class="border gray-background">
@@ -324,7 +465,7 @@
           <IMG src="../IMAGES/img-03.png" alt="img-03.png" class="img-fluid"/>
         <div class="row mt-4">
           <div class="col-2">
-            <?php $bdd_co->getCountProducts();?> item(s)
+            <?php $bdd_co->getCountAllProducts();?> item(s)
           </div>
           <div class="text-right col-10 ">
             <IMG src="../IMAGES/img-04.png" alt="img-04.png" class="img-fluid"/>
@@ -336,9 +477,12 @@
           <hr>
         <div class="row">
           <?php 
-             if (isset($_GET['categorie'])) {
+             if (isset($_GET['categorie']) && !isset($_GET['souscategorie'])) {
                 $bdd_co->getProductsByCategories($_GET['categorie']);
-              } else {
+              } elseif(isset($_GET['souscategorie'])){
+                $bdd_co->getProductsBySubCategories($_GET['souscategorie']);
+              }
+              else {
                 $bdd_co->getAllProducts();
           }
           ?>
@@ -398,3 +542,4 @@
     </div>
   </body>
 </HTML>
+<script src="../JS/function.js" type="text/javascript"> </script>

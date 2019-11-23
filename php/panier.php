@@ -1,4 +1,40 @@
-<?php session_start();?>
+<?php session_start();
+
+
+function showCart()
+{
+  if (!empty($_SESSION['cart']))
+  {
+    for($i = 0 ; $i < count($_SESSION['cart']['id_product']) ; $i++)
+    {
+      ?>
+         <tr>
+            <th scope="row"><IMG  src="<?php echo $_SESSION['cart']['url_image'][$i]?>" alt="cart.png"/></th>
+              <td><?php echo $_SESSION['cart']['prix'][$i]?>$</td>
+              <td>
+                <div class="col-3">
+                    <input class="form-control" type="number" value="1">
+                </div>
+              </td>
+              <td>$<?php echo  $_SESSION['cart']['prix'][$i]?></td>
+              <td><IMG  src="../IMAGES/cart-02.png" alt="cart-02.png"/></td>
+          </tr>
+      <?php
+    }
+  
+  } 
+}
+
+function getCountCart(){
+
+  if (!empty($_SESSION['cart'])){
+    echo count($_SESSION['cart']['id_product']);
+  }else{
+     echo 0;
+  }
+}
+
+?>
 <html>
     <HEAD>
             <link type="text/css" rel="stylesheet" href="./../CSS/softmarket.css" />
@@ -39,7 +75,7 @@
                   <div class="ml-auto">
                   <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Account &nbsp;</span></button> 
               | 
-              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Cart (0) &nbsp;</span></button>
+              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Cart (<span id="counter-cart"><?php getCountCart(); ?></span>) &nbsp;</span></button>
                   </div>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light ">
@@ -98,6 +134,7 @@
             <div class="container"> 
             <div class="row">
                 <div class="col-md-12">
+                    <span class="path">Home  >  Shopping Cart</span>
                     <H3>Shopping Cart</H3>
                 </div>
                 <div class="col-md-12">
@@ -115,17 +152,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row"><IMG  src="../IMAGES/cart.png" alt="cart.png"/></th>
-                                        <td>100$</td>
-                                        <td>
-                                            <div class="col-3">
-                                                <input class="form-control" type="number" value="1">
-                                            </div>
-                                        </td>
-                                        <td>$100</td>
-                                        <td><IMG  src="../IMAGES/cart-02.png" alt="cart-02.png"/></td>
-                                    </tr>
+                                  <?php showCart();?>
                                 </tbody>
                             </table>
                 </div>

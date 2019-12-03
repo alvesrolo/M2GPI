@@ -293,9 +293,14 @@
     }
 
     function getCountCart(){
-
+      
       if (!empty($_SESSION['cart'])){
-        echo count($_SESSION['cart']['id_product']);
+        $count=0;
+        for($i = 0 ; $i < count($_SESSION['cart']['id_product']) ; $i++)
+        {
+          $count= $_SESSION['cart']['qte'][$i] + $count;
+        }
+        echo $count;
       }else{
          echo 0;
       }

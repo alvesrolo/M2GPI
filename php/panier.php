@@ -7,28 +7,36 @@ function showCart()
   {
     for($i = 0 ; $i < count($_SESSION['cart']['id_product']) ; $i++)
     {
+      
       ?>
          <tr>
-            <th scope="row"><IMG  src="<?php echo $_SESSION['cart']['url_image'][$i]?>" alt="cart.png"/></th>
-              <td><?php echo $_SESSION['cart']['prix'][$i]?>$</td>
-              <td>
+            <td scope="row"><IMG  src="<?php echo  $_SESSION['cart']['url_image'][$i];?>" alt="cart.png"/>
+               <span class="blue-text ml-4"><?php echo  $_SESSION['cart']['nom'][$i];?></span></td>
+              <td class="align-middle"><?php echo  $_SESSION['cart']['prix'][$i]?>$</td>
+              <td class="align-middle">
                 <div class="col-3">
-                    <input class="form-control" type="number" value="1">
+                    <input class="form-control" type="number" value="<?php echo $_SESSION['cart']['qte'][$i]?>">
                 </div>
               </td>
-              <td>$<?php echo  $_SESSION['cart']['prix'][$i]?></td>
-              <td><IMG  src="../IMAGES/cart-02.png" alt="cart-02.png"/></td>
+              <td class="align-middle">$<?php echo   $_SESSION['cart']['prix'][$i];?></td>
+              <td class="align-middle"><IMG  src="../IMAGES/cart-02.png" alt="cart-02.png"/></td>
           </tr>
       <?php
+      
     }
   
   } 
 }
 
 function getCountCart(){
-
+      
   if (!empty($_SESSION['cart'])){
-    echo count($_SESSION['cart']['id_product']);
+    $count=0;
+    for($i = 0 ; $i < count($_SESSION['cart']['id_product']) ; $i++)
+    {
+      $count= $_SESSION['cart']['qte'][$i] + $count;
+    }
+    echo $count;
   }else{
      echo 0;
   }
@@ -75,7 +83,7 @@ function getCountCart(){
                   <div class="ml-auto">
                   <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Account &nbsp;</span></button> 
               | 
-              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown"><span class="blue-text">My Cart (<span id="counter-cart"><?php getCountCart(); ?></span>) &nbsp;</span></button>
+              <button type="button" class="btn btn-online-primary dropdown-toggle" data-toggle="dropdown" onclick="location.href='panier.php'"><span class="blue-text">My Cart (<span id="counter-cart"><?php getCountCart(); ?></span>) &nbsp;</span></button>
                   </div>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light ">

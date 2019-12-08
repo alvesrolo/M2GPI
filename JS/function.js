@@ -14,3 +14,31 @@ function addToCart(product){
 });
   
   }
+
+  
+  function removeToCart(product){
+
+    //console.log(product);
+    object = {
+      id : product
+    }
+    $.ajax({
+      url: "remove_to_cart.php",
+      type: "POST",
+      data: object,
+      success: function(data){
+          alert("success : le produit a été supprimé avec succès");
+          console.log(data);
+          const tempo=JSON.parse(data);
+          $('#line_'+parseInt(tempo[0])).remove();
+          var spansCart = $('#counter-cart');
+          //console.log(spansCart.text());
+          let spansValue=parseInt(spansCart.text())-tempo[1];
+          spansCart.text(spansValue);
+      }
+  })
+  .fail(function(data) {
+      alert("failure" + data[0]);
+  });
+    
+    }

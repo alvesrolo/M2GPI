@@ -5,7 +5,8 @@
     function connexion(){
         try
         {
-            $this->BDD = new PDO('mysql:host=localhost;dbname=qar_ihm;charset=utf8', 'root', '');
+            //$this->BDD = new PDO('mysql:host=localhost;dbname=qar_ihm;charset=utf8', 'root', '');
+            $this->BDD = new PDO('mysql:host=mysql-projetweb-alvesrolo.alwaysdata.net;dbname=projetweb-alvesrolo_qar_ihm;charset=utf8', '196157_root', 'Judo-131094');
             //echo("connexion OK");
         }
         catch (Exception $e)

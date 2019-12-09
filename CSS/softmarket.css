@@ -34,6 +34,44 @@
 .smallpolice {
   font-size: 13px;
 }
+
+.prix {
+  text-align: right;
+  font-size: 24px;
+}
+.smallprix {
+  text-align: right;
+  font-size: 13px;
+  
+}
+
+.page {
+  position: relative;
+  height: 30px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.image_principale {
+  height: 206px;
+  width: 160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image_panier {
+  height: 90px;
+  width: 70px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.banner {
+  height: 208px;
+  width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .gras {
   font-weight: bold;
 }

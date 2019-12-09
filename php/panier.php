@@ -10,15 +10,15 @@ function showCart()
       
       ?>
          <tr id="<?php echo 'line_'.$_SESSION['cart']['id_product'][$i];?>">
-            <td scope="row"><IMG  src="<?php echo  $_SESSION['cart']['url_image'][$i];?>" alt="cart.png"/>
+            <td scope="row"><IMG class="image_panier" src="<?php echo  $_SESSION['cart']['url_image'][$i];?>" alt="cart.png"/>
                <span class="blue-text ml-4"><?php echo  $_SESSION['cart']['nom'][$i];?></span></td>
-              <td class="align-middle"><?php echo  $_SESSION['cart']['prix'][$i]?>$</td>
+              <td class="align-middle">$<?php echo  $_SESSION['cart']['prix'][$i]?></td>
               <td class="align-middle">
                 <div class="col-3">
                     <input class="form-control" type="number" value="<?php echo $_SESSION['cart']['qte'][$i]?>">
                 </div>
               </td>
-              <td class="align-middle">$<?php echo   $_SESSION['cart']['prix'][$i];?></td>
+              <td class="align-middle">$<?php echo   $_SESSION['cart']['prix'][$i]*$_SESSION['cart']['qte'][$i];?></td>
               <td class="align-middle"><button type="button" class="close" aria-label="Close" onclick='removeToCart(<?php echo json_encode($_SESSION['cart']['id_product'][$i])?>)'><span aria-hidden="true">&times;</span></button></td>
           </tr>
       <?php
@@ -35,6 +35,20 @@ function getCountCart(){
     for($i = 0 ; $i < count($_SESSION['cart']['id_product']) ; $i++)
     {
       $count= $_SESSION['cart']['qte'][$i] + $count;
+    }
+    echo $count;
+  }else{
+     echo 0;
+  }
+}
+
+function getSubTotal(){
+      
+  if (!empty($_SESSION['cart'])){
+    $count=0;
+    for($i = 0 ; $i < count($_SESSION['cart']['id_product']) ; $i++)
+    {
+      $count= ($_SESSION['cart']['qte'][$i] * $_SESSION['cart']['prix'][$i]) + $count;
     }
     echo $count;
   }else{
@@ -70,7 +84,7 @@ function getCountCart(){
               integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
               crossorigin="anonymous"
             ></script>
-        <TITLE> SoftMarket QAR</TITLE>
+        <TITLE>Alves Rolo Quentin M2GPI 2019</TITLE>
    </HEAD>
    <body>
         <div class="container">
@@ -144,7 +158,8 @@ function getCountCart(){
                     <H3>Shopping Cart</H3>
                 </div>
                 <div class="col-md-12">
-                    Consecteur
+                <div class="alert alert-success" role="alert">
+                &#10003; *******PRODUCT******* has been successfully added to your shopping cart</div>
                 </div>
                 <div class="col-md-12">
                         <table class="table">
@@ -188,10 +203,25 @@ function getCountCart(){
                                     </div>
                                     <div class="col-md-4">
                                         <input class="form-control" type="text" value="Order Total">
-                                        <span class="smallpolice"><br>Subtotal<br></span>
-                                        <span class="smallpolice"><br>Grand Total<br></span>
-                                        <br>
-                                        <button type="button" class="btn btn-primary btn-lg btn-block">PROCEED TO CHECKOUT</button>
+                                        <div class="row">
+                                          <div class="col-md-12">
+                              
+                                            <div class="row"> 
+                                              <div class="col-md-6 smallpolice"><br>&nbsp; &nbsp;Subtotal</div> 
+                                              <div class="col-md-6  smallprix"> <br>$<span id="counter-SmallSubtotal"><?php getSubTotal();?> &nbsp;&nbsp;</span><br></div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                          <div class="row"> 
+                                            <div class="col-md-6 smallpolice"><br> &nbsp; &nbsp;Grand Total<br></div>
+                                            <div class="col-md-6 prix">$<span id="counter-Subtotal"> <?php getSubTotal();?> &nbsp;</span><br><br></div>
+                                            </div>
+                                          </div>
+                                        
+                                          <div class="col-md-12">
+                                            <button type="button" class="btn btn-primary btn-lg btn-block">PROCEED TO CHECKOUT</button>
+                                         </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -71,7 +71,7 @@
           ?>
           <div class='col-md-4 text-center mb-4'>
             
-            <IMG src="<?php echo $donnees['url_image']?>"/>
+            <IMG class="image_principale" src="<?php echo $donnees['url_image']?>"/>
             <?php if($donnees['promotion']!=0){
               ?><IMG class="promotion" src="../IMAGES/img-09.png" alt="img-09.png" class="img-fluid"/><?php
             }
@@ -119,7 +119,7 @@
           ?>
           <div class='col-md-4 text-center mb-4'>
             
-            <IMG src="<?php echo $donnees['url_image']?>"/>
+            <IMG class="image_principale" src="<?php echo $donnees['url_image']?>"/>
             <?php if($donnees['promotion']!=0){
               ?><IMG class="promotion" src="../IMAGES/img-09.png" alt="img-09.png" class="img-fluid"/><?php
             }
@@ -165,7 +165,7 @@
           ?>
           <div class='col-md-4 text-center mb-4'>
             
-            <IMG src="<?php echo $donnees['url_image']?>"/>
+            <IMG class="image_principale" src="<?php echo $donnees['url_image']?>"/>
             <?php if($donnees['promotion']!=0){
               ?><IMG class="promotion" src="../IMAGES/img-09.png" alt="img-09.png" class="img-fluid"/><?php
             }
@@ -190,6 +190,7 @@
               <IMG src="../IMAGES/img-13.png" alt="img-13.png" class="img-fluid"/>
             </div>
           </div>
+    
           <?php
         }
       }
@@ -372,7 +373,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <TITLE> SoftMarket Alves Rolo Quentin M2GPI 2019</TITLE>
+    <TITLE>Alves Rolo Quentin M2GPI 2019</TITLE>
   </HEAD>
   <body>
     <div class="container">
@@ -477,7 +478,7 @@
         </div>
 
         <div class="offset-md-1 col-md-8">
-          <IMG src="../IMAGES/img-03.png" alt="img-03.png" class="img-fluid"/>
+          <IMG class="banner img-fluid" src="../IMAGES/banner.png" alt="banner.png"/>
         <div class="row mt-4">
           <div class="col-2">
             <?php $bdd_co->getCountAllProducts();?> item(s)
@@ -501,6 +502,12 @@
                 $bdd_co->getAllProducts();
           }
           ?>
+          
+        </div>
+              <div class="row">
+      <div class="col-md-12 text-center">
+          <IMG class="page" src="../IMAGES/page.png" alt="page.png" />
+        </div>
         </div>
         </div>
       </div>

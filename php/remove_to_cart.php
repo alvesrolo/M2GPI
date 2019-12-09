@@ -14,6 +14,7 @@ function removeCart(){
       {
          array_push($ret,$_SESSION['cart']['id_product'][$i]);
          array_push($ret,$_SESSION['cart']['qte'][$i]);
+         array_push($ret,$_SESSION['cart']['prix'][$i]);
          array_splice($_SESSION['cart']['id_product'],$i,1);
          array_splice($_SESSION['cart']['url_image'],$i,1);
          array_splice( $_SESSION['cart']['nom'],$i,1);

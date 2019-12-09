@@ -28,13 +28,21 @@ function addToCart(product){
       data: object,
       success: function(data){
           alert("success : le produit a été supprimé avec succès");
-          console.log(data);
+          //console.log(data);
           const tempo=JSON.parse(data);
           $('#line_'+parseInt(tempo[0])).remove();
           var spansCart = $('#counter-cart');
           //console.log(spansCart.text());
           let spansValue=parseInt(spansCart.text())-tempo[1];
           spansCart.text(spansValue);
+
+          var spansSmallSubtotal = $('#counter-SmallSubtotal');
+          let spansSmallSubValue=parseInt(spansSmallSubtotal.text())-(tempo[1]*tempo[2]);
+          spansSmallSubtotal.text(spansSmallSubValue);
+
+          var spansSubtotal = $('#counter-Subtotal');
+          let spansSubValue=parseInt(spansSubtotal.text())-(tempo[1]*tempo[2]);
+          spansSubtotal.text(spansSubValue);
       }
   })
   .fail(function(data) {
